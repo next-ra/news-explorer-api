@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = require('bcryptjs');
 const { modelRes } = require('../libs/messages');
 
 const userSchema = new mongoose.Schema({
@@ -25,5 +26,17 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.statics.findUserByCredentials = async function(email, password) {
+  const user = await this.findOne({ email })
+    .select('+password')
+    .orFail(new Error('wrong email'));
+
+  return bcrypt.compare(password, user.password).then((matched) => {
+    if (!matched) {
+      throw new Error('wrong pass');
+    }
+    return user;
+  });
+};
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('user', userSchema);
