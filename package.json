@@ -1,7 +1,7 @@
 {
   "name": "new_explorer_api",
   "version": "1.0.0",
-  "description": "api ",
+  "description": "backend_api ",
   "main": "app.js",
   "scripts": {
     "start": "node app",

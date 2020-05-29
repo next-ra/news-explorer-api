@@ -7,21 +7,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: [true, 'обязательное поле']
+    required: [true, 'обязательное поле'],
   },
   email: {
     type: String,
     unique: true,
     required: [true, 'обязательное поле'],
-    validate: v => validator.isEmail(v),
-    message: 'неправильный формат почты'
+    validate: (v) => validator.isEmail(v),
+    message: 'неправильный формат почты',
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'обязательное поле'],
     minlength: 8,
-    select: false
-  }
+    select: false,
+  },
 });
 
 userSchema.plugin(uniqueValidator);
