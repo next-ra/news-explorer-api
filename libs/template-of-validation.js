@@ -5,7 +5,7 @@ const { errors } = require('./celebrate-error-messages');
 const template = {
   email: Joi.string()
     .required()
-    .email()
+    .email({ allowUnicode: false })
     .messages(errors),
   password: Joi.string()
     .required()
