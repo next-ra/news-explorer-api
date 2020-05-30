@@ -1,10 +1,9 @@
+const { errorsRes } = require('../libs/messages');
+
 module.exports = {
   errorHandler: (err, req, res, next) => {
-    // if (!err.status) {
-    //   res.send(err);
-    // } else
     res
       .status(err.status || 500)
-      .send({ message: err.message || 'ошибка сервера' });
+      .send({ message: err.message || errorsRes.internal });
   },
 };

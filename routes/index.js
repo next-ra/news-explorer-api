@@ -11,7 +11,8 @@ const { requestLogger, errorLogger } = require('../middlewares/logger');
 const {
   CreateUserValidation,
   loginValidation,
-} = require('../middlewares/celebrate');
+} = require('../middlewares/celebrate-validation');
+const { celebrateErrorHandler } = require('../middlewares/check-error');
 
 router.use(cookieParser());
 router.use(bodyParser.json());
@@ -24,5 +25,6 @@ router.use('/users', usersRouter);
 router.use('/articles', articlesRouter);
 router.all('*', doesNotExist);
 router.use(errorLogger);
+router.use(celebrateErrorHandler);
 router.use('/', errorHandler);
 module.exports = router;

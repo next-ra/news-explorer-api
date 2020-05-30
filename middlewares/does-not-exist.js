@@ -1,3 +1,6 @@
+const NotFound = require('../customErrors/NotFound');
+const { errorsRes } = require('../libs/messages');
+
 module.exports.doesNotExist = (req, res, next) => {
-  next(new Error('запрашиваемый ресурс не найден'));
+  next(new NotFound(errorsRes.notFound));
 };

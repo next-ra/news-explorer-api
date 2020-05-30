@@ -6,7 +6,9 @@ const {
   getUsersArticles,
   deleteArticle,
 } = require('../controllers/articles');
-const { CreateArticleValidation } = require('../middlewares/celebrate');
+const {
+  CreateArticleValidation,
+} = require('../middlewares/celebrate-validation');
 
 router.post('/', CreateArticleValidation, createArticle);
 router.get('/', getUsersArticles);

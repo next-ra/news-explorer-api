@@ -1,4 +1,6 @@
 const Article = require('../models/article');
+const NotFound = require('../customErrors/NotFound');
+const { articleRes } = require('../libs/messages');
 
 const createArticle = async (req, res, next) => {
   try {
@@ -13,7 +15,7 @@ const createArticle = async (req, res, next) => {
       image,
       owner: req.user._id,
     });
-    res.status(201).send({ data: article });
+    res.status(201).send({ message: articleRes.created, data: article });
   } catch (err) {
     next(err);
   }
@@ -22,7 +24,7 @@ const createArticle = async (req, res, next) => {
 const getUsersArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({ owner: req.user._id }).orFail(
-      new Error('404 notFound')
+      new NotFound(articleRes.notFound)
     );
     res.status(200).send({ data: articles });
   } catch (err) {
@@ -34,7 +36,7 @@ const deleteArticle = async (req, res, next) => {
   try {
     await Article.deleteOne(req.article);
 
-    res.send({ message: 'статья удалена', data: req.article });
+    res.send({ message: articleRes.deleted, data: req.article });
   } catch (err) {
     next(err);
   }

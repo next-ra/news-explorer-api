@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const config = require('../config');
+const { userRes } = require('../libs/messages');
+const NotFound = require('../customErrors/NotFound');
 
 const createUser = async (req, res, next) => {
   try {
@@ -12,7 +14,7 @@ const createUser = async (req, res, next) => {
       email,
       password: hash,
     });
-    res.status(201).send({ message: 'пользователь создан', data: user });
+    res.status(201).send({ message: userRes.created, data: user });
   } catch (err) {
     next(err);
   }
@@ -30,7 +32,7 @@ const login = async (req, res, next) => {
       httpOnly: true,
       sameSite: true,
     });
-    res.status(200).send({ message: 'авторизация успешна' });
+    res.status(200).send({ message: userRes.login });
   } catch (err) {
     next(err);
   }
@@ -39,7 +41,7 @@ const login = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail(
-      new Error('пользователь не найден')
+      new NotFound(userRes.notFound)
     );
     res.send({ data: user });
   } catch (err) {
