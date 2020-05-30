@@ -3,8 +3,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { createUser, login } = require('../controllers/users');
 const { doesNotExist } = require('../middlewares/does-not-exist');
-const { errorHandler } = require('../middlewares/errorHandler');
+const { errorHandler } = require('../middlewares/error-handler');
 const usersRouter = require('./users');
+const articlesRouter = require('./articles');
 const { auth } = require('../middlewares/auth');
 const { requestLogger, errorLogger } = require('../middlewares/logger');
 
@@ -16,6 +17,7 @@ router.post('/signup', createUser);
 router.post('/signin', login);
 router.use(auth);
 router.use('/users', usersRouter);
+router.use('/articles', articlesRouter);
 router.all('*', doesNotExist);
 router.use(errorLogger);
 router.use('/', errorHandler);
