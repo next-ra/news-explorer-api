@@ -6,8 +6,9 @@ const {
   getUsersArticles,
   deleteArticle,
 } = require('../controllers/articles');
+const { CreateArticleValidation } = require('../middlewares/celebrate');
 
-router.post('/', createArticle);
+router.post('/', CreateArticleValidation, createArticle);
 router.get('/', getUsersArticles);
 router.delete('/:id', checkArticle, checkOwner, deleteArticle);
 module.exports = router;

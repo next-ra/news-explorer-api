@@ -38,7 +38,7 @@ const articleSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-    required: [true, 'обязательное поле'],
+    required: [true, modelRes.required],
     select: false,
   },
 });

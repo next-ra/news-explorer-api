@@ -8,13 +8,17 @@ const usersRouter = require('./users');
 const articlesRouter = require('./articles');
 const { auth } = require('../middlewares/auth');
 const { requestLogger, errorLogger } = require('../middlewares/logger');
+const {
+  CreateUserValidation,
+  loginValidation,
+} = require('../middlewares/celebrate');
 
 router.use(cookieParser());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(requestLogger);
-router.post('/signup', createUser);
-router.post('/signin', login);
+router.post('/signup', CreateUserValidation, createUser);
+router.post('/signin', loginValidation, login);
 router.use(auth);
 router.use('/users', usersRouter);
 router.use('/articles', articlesRouter);
