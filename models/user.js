@@ -2,25 +2,25 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
 const bcrypt = require('bcryptjs');
-const { modelRes } = require('../libs/messages');
+const { model } = require('../libs/messages');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: [true, modelRes.required],
+    required: [true, model.required],
   },
   email: {
     type: String,
     unique: true,
-    required: [true, modelRes.required],
+    required: [true, model.required],
     validate: (v) => validator.isEmail(v),
-    message: modelRes.wrongEmail,
+    message: model.wrongEmail,
   },
   password: {
     type: String,
-    required: [true, modelRes.required],
+    required: [true, model.required],
     minlength: 8,
     select: false,
   },
