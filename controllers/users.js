@@ -14,7 +14,9 @@ const createUser = async (req, res, next) => {
       email,
       password: hash,
     });
-    res.status(201).send({ message: userRes.created, data: user });
+    res
+      .status(201)
+      .send({ message: userRes.created, email: user.email, name: user.name });
   } catch (err) {
     next(err);
   }

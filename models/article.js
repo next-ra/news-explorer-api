@@ -1,40 +1,15 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 const { modelRes } = require('../libs/messages');
+const { template } = require('../libs/template-of-models');
 
 const articleSchema = new mongoose.Schema({
-  keyword: {
-    type: String,
-    required: [true, modelRes.required],
-  },
-  title: {
-    type: String,
-    required: [true, modelRes.required],
-  },
-  text: {
-    type: String,
-    required: [true, modelRes.required],
-  },
-  date: {
-    type: String,
-    required: [true, modelRes.required],
-  },
-  source: {
-    type: String,
-    required: [true, modelRes.required],
-  },
-  link: {
-    type: String,
-    required: [true, modelRes.required],
-    validate: (v) => validator.isURL(v),
-    message: modelRes.wrongUrl,
-  },
-  image: {
-    type: String,
-    required: [true, modelRes.required],
-    validate: (v) => validator.isURL(v),
-    message: modelRes.wrongUrl,
-  },
+  keyword: template.textOnly,
+  title: template.textOnly,
+  text: template.textOnly,
+  date: template.textOnly,
+  source: template.textOnly,
+  link: template.link,
+  image: template.link,
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
