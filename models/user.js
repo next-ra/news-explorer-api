@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.statics.findUserByCredentials = async function(email, password) {
+userSchema.statics.findUserByCredentials = async function (email, password) {
   const user = await this.findOne({ email })
     .select('+password')
     .orFail(new Unauthorized(userRes.forbidden));

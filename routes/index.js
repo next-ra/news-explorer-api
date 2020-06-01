@@ -13,7 +13,7 @@ const {
   CreateUserValidation,
   loginValidation,
 } = require('../middlewares/celebrate-validation');
-const { celebrateErrorHandler } = require('../middlewares/check-error');
+const { checkError } = require('../middlewares/check-error');
 const limiter = require('../middlewares/limiter');
 
 router.use(helmet());
@@ -29,6 +29,6 @@ router.use('/users', usersRouter);
 router.use('/articles', articlesRouter);
 router.all('*', doesNotExist);
 router.use(errorLogger);
-router.use(celebrateErrorHandler);
+router.use(checkError);
 router.use('/', errorHandler);
 module.exports = router;

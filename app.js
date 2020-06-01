@@ -19,5 +19,4 @@ mongoose
 
 app.listen(config.PORT, () => {
   console.log(`Сервер работает на ${config.PORT} порту`);
-  console.log('NODE_ENV:', process.env.NODE_ENV);
 });
