@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const { createUser, login } = require('../controllers/users');
 const { doesNotExist } = require('../middlewares/does-not-exist');
 const { errorHandler } = require('../middlewares/error-handler');
@@ -13,7 +14,10 @@ const {
   loginValidation,
 } = require('../middlewares/celebrate-validation');
 const { celebrateErrorHandler } = require('../middlewares/check-error');
+const limiter = require('../middlewares/limiter');
 
+router.use(helmet());
+router.use(limiter);
 router.use(cookieParser());
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));

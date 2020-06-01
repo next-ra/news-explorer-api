@@ -17,7 +17,7 @@ const CreateUserValidation = celebrate(
       })
       .messages(errors),
   },
-  { abortEarly: false }
+  { abortEarly: false },
 );
 
 const loginValidation = celebrate(
@@ -29,7 +29,7 @@ const loginValidation = celebrate(
       })
       .messages(errors),
   },
-  { abortEarly: false }
+  { abortEarly: false },
 );
 
 const CreateArticleValidation = celebrate(
@@ -46,7 +46,7 @@ const CreateArticleValidation = celebrate(
       })
       .messages(errors),
   },
-  { abortEarly: false }
+  { abortEarly: false },
 );
 module.exports = {
   CreateUserValidation,

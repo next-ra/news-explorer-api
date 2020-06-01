@@ -24,7 +24,7 @@ const createArticle = async (req, res, next) => {
 const getUsersArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({ owner: req.user._id }).orFail(
-      new NotFound(articleRes.notFound)
+      new NotFound(articleRes.notFound),
     );
     res.status(200).send({ data: articles });
   } catch (err) {

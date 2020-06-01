@@ -43,7 +43,7 @@ const login = async (req, res, next) => {
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail(
-      new NotFound(userRes.notFound)
+      new NotFound(userRes.notFound),
     );
     res.send({ data: user });
   } catch (err) {
