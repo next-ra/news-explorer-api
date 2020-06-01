@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
       httpOnly: true,
       sameSite: true,
     });
-    res.status(200).send({ message: userRes.login });
+    res.send({ message: userRes.login });
   } catch (err) {
     next(err);
   }
