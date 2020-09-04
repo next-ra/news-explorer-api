@@ -30,9 +30,8 @@ const login = async (req, res, next) => {
       expiresIn: '7d',
     });
     res.cookie('jwt', token, {
-      maxAge: 3600000,
+      maxAge: 3600000 * 24 * 7,
       httpOnly: true,
-      sameSite: true,
     });
     res.send({ message: userRes.login });
   } catch (err) {
