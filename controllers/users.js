@@ -40,6 +40,19 @@ const login = async (req, res, next) => {
   }
 };
 
+const signOut = async (req, res, next) => {
+  try {
+    res.clearCookie('jwt', {
+      httpOnly: true,
+    });
+    res
+      .status(200)
+      .send({ message: 'вы вышли' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id).orFail(
@@ -54,4 +67,5 @@ module.exports = {
   createUser,
   getUser,
   login,
+  signOut,
 };

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const limiter = require('./middlewares/limiter');
+const cors = require('./middlewares/cors');
 const routes = require('./routes/index');
 const config = require('./config');
 const { checkError } = require('./middlewares/check-error');
@@ -10,6 +11,7 @@ const { errorHandler } = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
+app.use(cors);
 app.use(helmet());
 app.use(limiter);
 app.use(requestLogger);
