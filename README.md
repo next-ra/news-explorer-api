@@ -1,5 +1,6 @@
 ### Дипломная работа: backend для news-explorer-api
 
+## [frontend](https://github.com/next-ra/news-explorer_frontend)
 ### v1.0.0
 
 ## Проект [api.news-explorer.tk](https://api.news-explorer.tk)
